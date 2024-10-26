@@ -4,7 +4,6 @@
 }
 
 #container-left {
-    display: flex;
     flex-basis: 20%;
     height: 100%;
     border: 1px solid black;
