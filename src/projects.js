@@ -9,6 +9,24 @@ export function find_project(name) {
     return null;
 }
 
+function list_all_projects() {
+    all_projects.forEach(project => {
+        console.log(project.title);
+        // project.items.forEach(item => {
+        // console.log(item.title);
+        // });
+    });
+}
+
+export function delete_project(name) {
+    const project = find_project(name);
+    const index = all_projects.indexOf(project);
+    all_projects.splice(index, 1);
+    console.log(`deleted project ${name}`);
+    console.log(`remaining projects: `);
+    list_all_projects();
+}
+
 export function add_to_project(project_name, item) {
     const project = find_project(project_name);
     if (project === null) {

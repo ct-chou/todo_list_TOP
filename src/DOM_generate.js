@@ -1,5 +1,6 @@
 import { add } from "date-fns";
 import { create_new_item } from "./todo";
+import { delete_project, delete_from_project, find_project } from "./projects";
 
 const project_list = document.getElementById('project-list');
 const container_right = document.getElementById('container-right');
@@ -44,10 +45,19 @@ export function dom_initialize() {
 }
 
 export function dom_select_project(project, project_name) {
+  console.log(`Selecting project ${project_name}`);
+  console.log(`Project title: ${project.title}`);
   // first check if the project exists as a div
   const allProjects = document.querySelectorAll('.project');
+  // debug:
+  // console.log('printing all projects in DOM');
+  // allProjects.forEach(proj => console.log(proj.id));
+  // end debug
   let project_div = document.getElementById(project_name);
+  console.log(`Project Name: ${project_name}`);
+  console.log(`Div ID ${project_div.id}`);
   if (!project_div) {
+    console.log(`Project div with id ${project_name} not found`);
     dom_project_add(project, project_name);
     project_div = document.getElementById(project_name);
   }
@@ -55,6 +65,42 @@ export function dom_select_project(project, project_name) {
   project_div.classList.add('project-selected');
   dom_display_project(project, project_name);
 }
+
+function dom_project_remove(project_name) {
+  // console.log(`removing project ${project_name}`);
+  if (!confirm(`Are you sure you want to delete the project ${project_name}?`)) {
+    return;
+  }
+  const project_div = document.getElementById(project_name);
+  if (project_div) {
+    console.log('calling .remove()');
+    project_div.remove();
+    // Force a repaint by manipulating the DOM slightly
+    const project_list = document.getElementById('project-list');
+    if (project_list) {
+      console.log('forcing repaint');
+      project_list.style.display = 'none';
+      project_list.offsetHeight; // Trigger a reflow
+      project_list.style.display = '';
+    }
+  } else {
+    console.error(`Project div with id ${project_name} not found`);
+  }
+  const project_list = document.getElementById('project-list');
+  const firstProject = project_list.firstElementChild;
+  if (firstProject) {
+    const projectName = firstProject.getAttribute('id');
+    console.log(`selecting project ${projectName}`);
+    const project = find_project(projectName);
+    console.log(`Selecting ${project.title}`);
+    if (project) {
+      dom_select_project(project, projectName);
+    } else {
+      console.error(`Project with name ${projectName} not found`);
+    }
+  }
+}
+
 
 export function dom_project_add(project, project_name) {
   const allProjects = document.querySelectorAll('.project');
@@ -67,18 +113,32 @@ export function dom_project_add(project, project_name) {
   header.classList.add('project-header');
   header.textContent = project_name;
   project_div.appendChild(header);
+  const delete_button = document.createElement('button');
+  delete_button.classList.add('delete-project-button');
+  delete_button.textContent = 'Delete';
+  project_div.appendChild(delete_button);
+  delete_button.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    delete_project(project_name);
+    dom_project_remove(project_name);
+  });
+
   project_list.appendChild(project_div);
-  project_div.addEventListener('click', () => {
+  project_div.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     dom_select_project(project, project_name);
   });
 }
 
+// displays the projects in the right container
 function dom_display_project(project, project_name) {
-  const project_div = document.createElement('div');
   const existing_project_display = document.querySelector('.project-display-right');
   if (existing_project_display) {
     existing_project_display.remove();
   }
+  const project_div = document.createElement('div');
   project_div.classList.add('project-display-right');
   project.items.forEach(item => {
     const item_div = document.createElement('div');
@@ -108,6 +168,29 @@ function dom_display_project(project, project_name) {
     item_description.textContent = item.description;
     item_div.appendChild(item_description);
     project_div.appendChild(item_div);
+    // complete and delete buttons
+    const button_container = document.createElement('div');
+    button_container.classList.add('button-container');
+    item_div.appendChild(button_container);
+    const del_button = document.createElement('button');
+    del_button.classList.add('delete-button');
+    del_button.textContent = 'Delete';
+    button_container.appendChild(del_button);
+    const complete_button = document.createElement('button');
+    complete_button.classList.add('complete-button');
+    complete_button.textContent = 'Completed!';
+    button_container.appendChild(complete_button);
+    // event listeners
+    del_button.addEventListener('click', () => {
+      console.log('delete');
+      delete_from_project(project, item);
+      dom_display_project(project, project_name);
+    });
+    complete_button.addEventListener('click', () => {
+      // project.completeItem(item);
+      console.log('complete');
+      // dom_display_project(project, project_name);
+    });
   });
   container_right.appendChild(project_div);
 }
