@@ -45,19 +45,9 @@ export function dom_initialize() {
 }
 
 export function dom_select_project(project, project_name) {
-  // console.log(`Selecting project ${project_name}`);
-  // console.log(`Project title: ${project.title}`);
-  // first check if the project exists as a div
   const allProjects = document.querySelectorAll('.project');
-  // debug:
-  // console.log('printing all projects in DOM');
-  // allProjects.forEach(proj => console.log(proj.id));
-  // end debug
   let project_div = document.getElementById(project_name);
-  // console.log(`Project Name: ${project_name}`);
-  // console.log(`Div ID ${project_div.id}`);
   if (!project_div) {
-    // console.log(`Project div with id ${project_name} not found`);
     dom_project_add(project, project_name);
     project_div = document.getElementById(project_name);
   }
@@ -131,8 +121,45 @@ export function dom_project_add(project, project_name) {
   });
 }
 
-// displays the projects in the right container
+// Zoom in on selected card
+function select_card(item_div) {
+  const display = document.querySelector('.project-display-right');
+  display.remove();
+  const full_card_display = document.createElement('div');
+  full_card_display.classList.add('full-card-display');
+  const title = document.createElement('h2');
+  title.textContent = item_div.querySelector('.item-title').textContent;
+  full_card_display.appendChild(title);
+  const description = document.createElement('p');
+  description.textContent = item_div.querySelector('.item-description').textContent;
+  full_card_display.appendChild(description);
+  const due_date = document.createElement('p');
+  due_date.textContent = item_div.querySelector('.attributes-left').textContent;
+  full_card_display.appendChild(due_date);
+  const priority = document.createElement('p');
+  priority.textContent = item_div.querySelector('.attributes-right').textContent;
+  full_card_display.appendChild(priority);
+  const close_button = document.createElement('button');
+  close_button.textContent = 'Close';
+  close_button.classList.add('close-button');
+  full_card_display.appendChild(close_button);
+  close_button.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dom_display_project(find_project(document.querySelector('.project-selected').id), document.querySelector('.project-selected').id);
+  });
+  container_right.appendChild(full_card_display);
+  container_right.classList.add('align-center');
+
+}
+
+// displays the todo items in selected project in the right container
 function dom_display_project(project, project_name) {
+  const full_card = document.querySelector('.full-card-display');
+  if (full_card) {
+    full_card.remove();
+    container_right.classList.remove('align-center');
+  }
   const existing_project_display = document.querySelector('.project-display-right');
   if (existing_project_display) {
     existing_project_display.remove();
@@ -180,8 +207,16 @@ function dom_display_project(project, project_name) {
     complete_button.textContent = 'Completed!';
     button_container.appendChild(complete_button);
     // event listeners
-    del_button.addEventListener('click', () => {
-      // console.log('delete');
+    item_div.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      select_card(item_div);
+      console.log(`clicked on item ${item.title}`);
+    });
+
+    del_button.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       if (!confirm(`Are you sure you want to delete the item: ${item.title}?`)) {
         return;
       }
@@ -189,9 +224,9 @@ function dom_display_project(project, project_name) {
       delete_from_project(project, item);
       dom_display_project(project, project_name);
     });
-    complete_button.addEventListener('click', () => {
-      // project.completeItem(item);
-      console.log('complete');
+    complete_button.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       if (!confirm(`Confirming completion of item: ${item.title}?`)) {
         return;
       }
