@@ -128,26 +128,46 @@ function select_card(item_div) {
   const full_card_display = document.createElement('div');
   full_card_display.classList.add('full-card-display');
   const title = document.createElement('h2');
+  title.setAttribute('id', 'full-card-title');
   title.textContent = item_div.querySelector('.item-title').textContent;
   full_card_display.appendChild(title);
+  const container_2 = document.createElement('div');
+  container_2.setAttribute('id', 'full-card-container-2');
+  full_card_display.appendChild(container_2);
+  const due_date = document.createElement('p');
+  due_date.setAttribute('id', 'full-card-due-date');
+  due_date.textContent = item_div.querySelector('.attributes-left').textContent;
+  container_2.appendChild(due_date);
+  const priority = document.createElement('p');
+  priority.setAttribute('id', 'full-card-priority');
+  priority.textContent = item_div.querySelector('.attributes-right').textContent;
+  container_2.appendChild(priority);
   const description = document.createElement('p');
+  description.setAttribute('id', 'full-card-description');
   description.textContent = item_div.querySelector('.item-description').textContent;
   full_card_display.appendChild(description);
-  const due_date = document.createElement('p');
-  due_date.textContent = item_div.querySelector('.attributes-left').textContent;
-  full_card_display.appendChild(due_date);
-  const priority = document.createElement('p');
-  priority.textContent = item_div.querySelector('.attributes-right').textContent;
-  full_card_display.appendChild(priority);
+  const div_buttons = document.createElement('div');
+  div_buttons.setAttribute('id', 'full-card-button-container');
+  full_card_display.appendChild(div_buttons);
   const close_button = document.createElement('button');
   close_button.textContent = 'Close';
   close_button.classList.add('close-button');
-  full_card_display.appendChild(close_button);
+  div_buttons.appendChild(close_button);
   close_button.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     dom_display_project(find_project(document.querySelector('.project-selected').id), document.querySelector('.project-selected').id);
   });
+  const edit_button = document.createElement('button');
+  edit_button.textContent = 'Edit';
+  edit_button.classList.add('edit-button');
+  div_buttons.appendChild(edit_button);
+  edit_button.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('edit button clicked');
+  });
+
   container_right.appendChild(full_card_display);
   container_right.classList.add('align-center');
 
