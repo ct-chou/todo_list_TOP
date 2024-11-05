@@ -1,6 +1,6 @@
 import { add } from "date-fns";
 import { create_new_item } from "./todo";
-import { delete_project, delete_from_project, find_project } from "./projects";
+import { delete_project, delete_from_project, find_project, complete_project_item } from "./projects";
 
 const project_list = document.getElementById('project-list');
 const container_right = document.getElementById('container-right');
@@ -34,7 +34,7 @@ function dom_add_task() {
     const project = document.getElementById('new-project').value;
     // const project = "Ollie;"
     create_new_item(title, description, due_date, priority, project);
-    console.log(title, description, due_date, priority, project);
+    // console.log(title, description, due_date, priority, project);
     dialog.close();
   });
 
@@ -45,8 +45,8 @@ export function dom_initialize() {
 }
 
 export function dom_select_project(project, project_name) {
-  console.log(`Selecting project ${project_name}`);
-  console.log(`Project title: ${project.title}`);
+  // console.log(`Selecting project ${project_name}`);
+  // console.log(`Project title: ${project.title}`);
   // first check if the project exists as a div
   const allProjects = document.querySelectorAll('.project');
   // debug:
@@ -54,10 +54,10 @@ export function dom_select_project(project, project_name) {
   // allProjects.forEach(proj => console.log(proj.id));
   // end debug
   let project_div = document.getElementById(project_name);
-  console.log(`Project Name: ${project_name}`);
-  console.log(`Div ID ${project_div.id}`);
+  // console.log(`Project Name: ${project_name}`);
+  // console.log(`Div ID ${project_div.id}`);
   if (!project_div) {
-    console.log(`Project div with id ${project_name} not found`);
+    // console.log(`Project div with id ${project_name} not found`);
     dom_project_add(project, project_name);
     project_div = document.getElementById(project_name);
   }
@@ -73,12 +73,12 @@ function dom_project_remove(project_name) {
   }
   const project_div = document.getElementById(project_name);
   if (project_div) {
-    console.log('calling .remove()');
+    // console.log('calling .remove()');
     project_div.remove();
     // Force a repaint by manipulating the DOM slightly
     const project_list = document.getElementById('project-list');
     if (project_list) {
-      console.log('forcing repaint');
+      // console.log('forcing repaint');
       project_list.style.display = 'none';
       project_list.offsetHeight; // Trigger a reflow
       project_list.style.display = '';
@@ -90,9 +90,9 @@ function dom_project_remove(project_name) {
   const firstProject = project_list.firstElementChild;
   if (firstProject) {
     const projectName = firstProject.getAttribute('id');
-    console.log(`selecting project ${projectName}`);
+    // console.log(`selecting project ${projectName}`);
     const project = find_project(projectName);
-    console.log(`Selecting ${project.title}`);
+    // console.log(`Selecting ${project.title}`);
     if (project) {
       dom_select_project(project, projectName);
     } else {
@@ -100,7 +100,6 @@ function dom_project_remove(project_name) {
     }
   }
 }
-
 
 export function dom_project_add(project, project_name) {
   const allProjects = document.querySelectorAll('.project');
@@ -182,14 +181,22 @@ function dom_display_project(project, project_name) {
     button_container.appendChild(complete_button);
     // event listeners
     del_button.addEventListener('click', () => {
-      console.log('delete');
+      // console.log('delete');
+      if (!confirm(`Are you sure you want to delete the item: ${item.title}?`)) {
+        return;
+      }
+
       delete_from_project(project, item);
       dom_display_project(project, project_name);
     });
     complete_button.addEventListener('click', () => {
       // project.completeItem(item);
       console.log('complete');
-      // dom_display_project(project, project_name);
+      if (!confirm(`Confirming completion of item: ${item.title}?`)) {
+        return;
+      }
+      complete_project_item(project, item);
+      dom_display_project(project, project_name);
     });
   });
   container_right.appendChild(project_div);

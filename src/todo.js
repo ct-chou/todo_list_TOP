@@ -16,6 +16,8 @@ export function create_new_item(title, description, dueDate, priority, project_n
     dom_select_project(project, project_name);
 }
 
+
+
 export class TodoItem {
     constructor(title, description, dueDate, priority) {
         this.title = title;
