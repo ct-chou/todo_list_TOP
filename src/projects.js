@@ -1,7 +1,22 @@
 export const all_projects = [];
 
-export function add_to_project(project, item) {
+export function find_project(name) {
+    for (let i = 0; i < all_projects.length; i++) {
+        if (all_projects[i].title === name) {
+            return all_projects[i];
+        }
+    }
+    return null;
+}
+
+export function add_to_project(project_name, item) {
+    const project = find_project(project_name);
+    if (project === null) {
+        console.log("add_to_project: Project does not exist - error");
+        return;
+    }
     project.items.push(item);
+    // project.items.push(item);
 }
 
 export function delete_from_project(project, item) {
@@ -32,7 +47,7 @@ class Project {
 export function new_project(name) {
     if (check_existing_project(name)) {
         console.log("Project already exists - error");
-        return;
+        return null;
     }
     const project = new Project(name);
     all_projects.push(project);

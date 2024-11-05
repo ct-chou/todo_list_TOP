@@ -1,10 +1,15 @@
-import { dom_project_add } from "./DOM_generate";
+import { dom_display_project, dom_project_add, dom_select_project } from "./DOM_generate";
+import { add_to_project, find_project, new_project } from "./projects";
 
 export const greeting = 'hello';
 
-export function newItem(title, description, dueDate, priority, project_name) {
+export function create_new_item(title, description, dueDate, priority, project_name) {
     const item = new TodoItem(title, description, dueDate, priority);
-
+    new_project(project_name);
+    add_to_project(project_name, item);
+    console.log('Added todo item to project ${project_name}');
+    const project = find_project(project_name);
+    dom_select_project(project, project_name);
 }
 
 export class TodoItem {

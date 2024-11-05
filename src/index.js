@@ -3,39 +3,27 @@ import "./style.css";
 // import { storageAvailable } from "./local_storage";
 import { compareAsc, format } from "date-fns";
 import { new_project, all_projects, add_to_project } from "./projects";
-import { dom_project_add, dom_display_project, dom_initialize } from "./DOM_generate";
+import { dom_project_add, dom_initialize, dom_select_project } from "./DOM_generate";
 
+// POPULATE WITH DEFAULT INFO
 const default_proj = new_project("Default");
-// all_projects.push(default_proj);
 const item1 = new TodoItem("Buy groceries", "Milk, Cheese, Pizza, Fruit, Tylenol", "2021-12-31", "High");
 const item2 = new TodoItem("Sell groceries", "Milk, Cheese, Pizza, Fruit, Tylenol", "2021-12-31", "High");
 dom_project_add(default_proj, default_proj.title);
-// default_proj.items.push(item1);
-// default_proj.items.push(item2);
-add_to_project(default_proj, item1);
-add_to_project(default_proj, item2);
-
+add_to_project(default_proj.title, item1);
+add_to_project(default_proj.title, item2);
 const ollie = new_project("Ollie");
-// all_projects.push(ollie);
 const item3 = new TodoItem("Walk Ollie", "Play ball ball", "2025-12-31", "High");
 const item4 = new TodoItem("Feed Ollie", "80g per meal", "2024-12-31", "High");
 dom_project_add(ollie, ollie.title);
-ollie.items.push(item3);
-ollie.items.push(item4);
-
-dom_display_project(default_proj, default_proj.title);
-dom_display_project(ollie, ollie.title);
+add_to_project(ollie.title, item3);
+add_to_project(ollie.title, item4);
+dom_select_project(ollie, ollie.title);
+dom_select_project(default_proj, default_proj.title);
+// END POPULATION OF DEFAULT LISTS
 
 dom_initialize();
 
-// test existing project
-const ollie2 = new_project("Ollie");
-
-// console.log(default_proj.items[0]);
-// console.log(item1.title);
-
-// item1.priority = "Low";
-// console.log(item1.priority);
 
 // format(new Date(2014, 1, 11), "yyyy-MM-dd");
 // //=> '2014-02-11'

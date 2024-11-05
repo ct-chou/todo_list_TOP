@@ -1,5 +1,5 @@
 import { add } from "date-fns";
-import { newItem } from "./todo";
+import { create_new_item } from "./todo";
 
 const project_list = document.getElementById('project-list');
 const container_right = document.getElementById('container-right');
@@ -29,8 +29,9 @@ function dom_add_task() {
     const description = document.getElementById('new-description').value;
     const due_date = document.getElementById('new-due-date').value;
     const priority = document.getElementById('new-priority').value;
-    const project = document.querySelector('.new-project').id;
-    newItem(title, description, due_date, priority, project);
+    const project = document.getElementById('new-project').value;
+    // const project = "Ollie;"
+    create_new_item(title, description, due_date, priority, project);
     console.log(title, description, due_date, priority, project);
     dialog.close();
   });
@@ -39,6 +40,14 @@ function dom_add_task() {
 
 export function dom_initialize() {
   dom_add_task();
+}
+
+export function dom_select_project(project, project_name) {
+  const allProjects = document.querySelectorAll('.project');
+  const project_div = document.getElementById(project_name);
+  allProjects.forEach(proj => proj.classList.remove('project-selected'));
+  project_div.classList.add('project-selected');
+  dom_display_project(project, project_name);
 }
 
 export function dom_project_add(project, project_name) {
@@ -54,14 +63,11 @@ export function dom_project_add(project, project_name) {
   project_div.appendChild(header);
   project_list.appendChild(project_div);
   project_div.addEventListener('click', () => {
-    const allProjects = document.querySelectorAll('.project');
-    allProjects.forEach(proj => proj.classList.remove('project-selected'));
-    project_div.classList.add('project-selected');
-    dom_display_project(project, project_name);
+    dom_select_project(project, project_name);
   });
 }
 
-export function dom_display_project(project, project_name) {
+function dom_display_project(project, project_name) {
   const project_div = document.createElement('div');
   const existing_project_display = document.querySelector('.project-display-right');
   if (existing_project_display) {
