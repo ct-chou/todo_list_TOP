@@ -86,24 +86,24 @@
     background-color: lightsteelblue;
 }
 
-
-
-.item {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid black;
-    background-color: white;
-    cursor: pointer;
-    width: clamp(200px, 25vw, 300px);
-    /* width: 100%; */
-}
-
 .project-display-right {
     display: flex;
     flex-wrap: wrap;
     align-items: left;
     padding: 0;
     margin: 0;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+    width: clamp(200px, 25vw, 300px);
+    height: clamp(200px, 15vh, 300px);
 }
 
 .item-title {
@@ -135,12 +135,14 @@
 .item-description {
     margin-top: 10px;
     margin-bottom: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .button-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 10px;
+    margin-top: auto;
     margin-bottom: 10px;
 }
 
