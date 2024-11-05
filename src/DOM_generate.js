@@ -43,8 +43,13 @@ export function dom_initialize() {
 }
 
 export function dom_select_project(project, project_name) {
+  // first check if the project exists as a div
   const allProjects = document.querySelectorAll('.project');
-  const project_div = document.getElementById(project_name);
+  let project_div = document.getElementById(project_name);
+  if (!project_div) {
+    dom_project_add(project, project_name);
+    project_div = document.getElementById(project_name);
+  }
   allProjects.forEach(proj => proj.classList.remove('project-selected'));
   project_div.classList.add('project-selected');
   dom_display_project(project, project_name);

@@ -7,8 +7,12 @@ export function create_new_item(title, description, dueDate, priority, project_n
     const item = new TodoItem(title, description, dueDate, priority);
     new_project(project_name);
     add_to_project(project_name, item);
-    console.log('Added todo item to project ${project_name}');
+    console.log(`Added todo item to project ${project_name}`);
     const project = find_project(project_name);
+    if (project === null) {
+        console.log("create_new_item: Project does not exist - error");
+        return;
+    }
     dom_select_project(project, project_name);
 }
 
