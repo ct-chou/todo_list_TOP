@@ -94,11 +94,13 @@
     border: 1px solid black;
     background-color: white;
     cursor: pointer;
+    width: clamp(200px, 25vw, 300px);
     /* width: 100%; */
 }
 
 .project-display-right {
     display: flex;
+    flex-wrap: wrap;
     align-items: left;
     padding: 0;
     margin: 0;
