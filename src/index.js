@@ -8,14 +8,19 @@ import { dom_project_add, dom_display_project } from "./DOM_generate";
 const default_proj = newProject("Default");
 const item1 = new TodoItem("Buy groceries", "Milk, Cheese, Pizza, Fruit, Tylenol", "2021-12-31", "High");
 const item2 = new TodoItem("Sell groceries", "Milk, Cheese, Pizza, Fruit, Tylenol", "2021-12-31", "High");
-// all_projects.push(default_proj);
-// console.log('all_projects:', all_projects);
-dom_project_add(default_proj, "Default");
-dom_project_add(default_proj, "Dummy2");
+dom_project_add(default_proj, default_proj.title);
 default_proj.items.push(item1);
 default_proj.items.push(item2);
-dom_display_project(default_proj, "Default");
 
+const ollie = newProject("Ollie");
+const item3 = new TodoItem("Walk Ollie", "Play ball ball", "2025-12-31", "High");
+const item4 = new TodoItem("Feed Ollie", "80g per meal", "2024-12-31", "High");
+dom_project_add(ollie, ollie.title);
+ollie.items.push(item3);
+ollie.items.push(item4);
+
+dom_display_project(default_proj, default_proj.title);
+dom_display_project(ollie, ollie.title);
 // console.log(default_proj.items[0]);
 // console.log(item1.title);
 

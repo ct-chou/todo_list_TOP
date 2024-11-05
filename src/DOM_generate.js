@@ -15,6 +15,10 @@ export function dom_project_add(project, project_name) {
 
 export function dom_display_project(project, project_name) {
   const project_div = document.createElement('div');
+  const existing_project_display = document.querySelector('.project-display-right');
+  if (existing_project_display) {
+    existing_project_display.remove();
+  }
   project_div.classList.add('project-display-right');
   project.items.forEach(item => {
     const item_div = document.createElement('div');

@@ -1,3 +1,23 @@
+#container-all {
+    display: flex;
+    height: 80vh;
+}
+
+#cont-header {
+    display: flex;
+}
+
+/* --------------- LEFT container ----------------*/
+#container-left {
+    flex-basis: 20%;
+    height: 100%;
+    border: 1px solid black;
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
 #project-list-header {
     padding: 0;
     margin: 0;
@@ -19,24 +39,31 @@
     padding: 0;
 }
 
-#container-all {
-    display: flex;
-    height: 80vh;
-}
-
-#cont-header {
-    display: flex;
-}
-
-#container-left {
-    flex-basis: 20%;
-    height: 100%;
-    border: 1px solid black;
-    background-color: lightgrey;
+#project-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    padding: 0;
+    margin: 0;
 }
+
+#btn-container {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+#add-task {
+    padding: 10px;
+    margin: 10px;
+    /* flex: 0 1 100px; */
+    /* max-width: 100px; */
+}
+
+/* ----------------End left Container ------------ */
+
+/* right container */
 
 #container-right {
     flex-basis: 80%;
@@ -45,16 +72,8 @@
     background-color: lightsteelblue;
 }
 
-#project-list {
-    display: flex;
-    flex-direction: column;
-    /* align-items: left; */
-    padding: 0;
-    margin: 0;
-}
 
 .project {
-    flex: 1;
     margin: 5px;
     padding: 5px;
     border: 1px solid black;
