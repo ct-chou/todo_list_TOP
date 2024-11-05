@@ -8,7 +8,7 @@ import { dom_project_add, dom_initialize, dom_select_project } from "./DOM_gener
 // POPULATE WITH DEFAULT INFO
 const default_proj = new_project("Default");
 const item1 = new TodoItem("Buy groceries", "Milk, Cheese, Pizza, Fruit, Tylenol", "2021-12-31", "High");
-const item2 = new TodoItem("Sell groceries", "Milk, Cheese, Pizza, Fruit, Tylenol", "2021-12-31", "High");
+const item2 = new TodoItem("Practice guitar", "Practice finding individual notes", "2024-12-31", "Low");
 dom_project_add(default_proj, default_proj.title);
 add_to_project(default_proj.title, item1);
 add_to_project(default_proj.title, item2);
