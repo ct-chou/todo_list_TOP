@@ -61,6 +61,20 @@
     /* max-width: 100px; */
 }
 
+.project {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: white;
+    font-size: medium;
+    cursor: pointer;
+    /* width: 100%; */
+}
+
+.project-selected {
+    background-color: lightblue;
+}
+
 /* ----------------End left Container ------------ */
 
 /* right container */
@@ -73,14 +87,6 @@
 }
 
 
-.project {
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid black;
-    background-color: white;
-    cursor: pointer;
-    /* width: 100%; */
-}
 
 .item {
     margin: 10px;
@@ -128,3 +134,5 @@
     margin-top: 10px;
     margin-bottom: 5px;
 }
+
+/* -----------------   Dialog Box  ------------------ */

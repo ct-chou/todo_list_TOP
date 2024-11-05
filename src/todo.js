@@ -1,7 +1,10 @@
+import { dom_project_add } from "./DOM_generate";
+
 export const greeting = 'hello';
 
-export function newItem(title, description, dueDate, priority) {
-    return { title, description, dueDate, priority };
+export function newItem(title, description, dueDate, priority, project_name) {
+    const item = new TodoItem(title, description, dueDate, priority);
+
 }
 
 export class TodoItem {
