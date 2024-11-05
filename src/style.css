@@ -136,3 +136,31 @@
 }
 
 /* -----------------   Dialog Box  ------------------ */
+#dialog-box p {
+    margin: 0;
+    padding: 0;
+}
+
+#form-bucket-1 {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    gap: 10px;
+}
+
+#form-bucket-2 {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    gap: 10px;
+}
+
+#form-bucket-3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#new-description {
+    width: 60vw;
+    height: 60vh;
+}

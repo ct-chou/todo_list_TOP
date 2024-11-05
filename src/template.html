@@ -23,31 +23,38 @@
                     <form>
                         <p>Add New Task</p>
                         <div>
-                            <div id="title-div">
-                                <p>Title: </p>
-                                <input type="text" id="new-title" placeholder="Title">
+                            <div id="form-bucket-1">
+                                <div id="title-div">
+                                    <p>Title: </p>
+                                    <input type="text" id="new-title" placeholder="Title">
+                                </div>
+                                <div id="project-div">
+                                    <p>Project: </p>
+                                    <input type="text" id="new-project" placeholder="Project">
+                                </div>
                             </div>
-                            <div id="project-div">
-                                <p>Project: </p>
-                                <input type="text" id="new-project" placeholder="Project">
-                            </div>
-                            <div id="date-div">
-                                <p>Due Date: </p>
-                                <input type="date" id="new-due-date" placeholder="Due Date">
-                            </div>
-                            <div id="priority-div">
-                                <p>Priority: </p>
-                                <select id="new-priority">
-                                    <option value="low">Low</option>
-                                    <option value="normal">Normal</option>
-                                    <option value="high">High</option>
-                                </select>
+                            <div id="form-bucket-2">
+                                <div id="date-div">
+                                    <p>Due Date: </p>
+                                    <input type="date" id="new-due-date" placeholder="Due Date">
+                                </div>
+                                <div id="priority-div">
+                                    <p>Priority: </p>
+                                    <select id="new-priority">
+                                        <option value="low">Low</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <input type="text" id="new-description" placeholder="Description">
+                        <div id="form-bucket-3">
+                            <!-- <input type="text" id="new-description" placeholder="Description" maxlength="500"> -->
+                            <textarea name="description-input" id="new-description" rows="25" cols="50">
+                                Description
+                            </textarea>
                         </div>
-                        <div>
+                        <div id="form-bucket-4">
                             <button id="submit-btn">Submit</button>
                             <button id="cancel-btn">Cancel</button>
                     </form>
