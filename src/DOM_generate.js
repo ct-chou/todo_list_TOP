@@ -19,7 +19,8 @@ function dom_add_task() {
     document.getElementById('new-project').value = '';
   });
 
-  cancelBtn.addEventListener('click', () => {
+  cancelBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     dialog.close();
   });
 
