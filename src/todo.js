@@ -4,10 +4,10 @@ import { add_to_project, find_project, new_project } from "./projects";
 export const greeting = 'hello';
 
 export function create_new_item(title, description, dueDate, priority, project_name) {
-    const item = new TodoItem(title, description, dueDate, priority);
+    const item = new TodoItem(title, description, dueDate, priority, project_name);
     new_project(project_name);
     add_to_project(project_name, item);
-    console.log(`Added todo item ${title} to project ${project_name}`);
+    // console.log(`Added todo item ${title} to project ${project_name}`);
     const project = find_project(project_name);
     if (project === null) {
         console.log("create_new_item: Project does not exist - error");
@@ -19,11 +19,12 @@ export function create_new_item(title, description, dueDate, priority, project_n
 
 
 export class TodoItem {
-    constructor(title, description, dueDate, priority) {
+    constructor(title, description, dueDate, priority, project_name) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.project_name = project_name;
     }
 
     get title() {

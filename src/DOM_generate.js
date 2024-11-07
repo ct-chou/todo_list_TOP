@@ -1,6 +1,7 @@
 import { add } from "date-fns";
 import { create_new_item } from "./todo";
 import { delete_project, delete_from_project, find_project, complete_project_item } from "./projects";
+import { store_all_projects } from "./local_storage";
 
 const project_list = document.getElementById('project-list');
 const container_right = document.getElementById('container-right');
@@ -38,6 +39,8 @@ function dom_add_task() {
       return;
     }
     create_new_item(title, description, due_date, priority, project);
+    //backup into storage
+    store_all_projects();
     // console.log(title, description, due_date, priority, project);
     dialog.close();
   });

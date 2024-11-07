@@ -20,20 +20,15 @@ export function retrieve_db_projects() {
     for (let i = 0; i < projects.length; i++) {
         const project = new Project(projects[i].title);
         projects[i].items.forEach(item => {
-            // console.log(item._title)
             const todo_item = create_new_item(item._title, item._description, item._dueDate, item._priority, projects[i].title);
             project.items.push(todo_item);
         });
-        // all_projects.push(project);
     }
 }
 
 export function load_all_projects() {
     retrieve_db_projects();
-    list_all_projects();
-    // for (let i = 0; i < all_projects.length; i++) {
-    // dom_select_project(all_projects[i], all_projects[i].title);
-    // }
+    // list_all_projects();
 }
 
 //helper debug function

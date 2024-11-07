@@ -19,10 +19,33 @@ export function storageAvailable(type) {
     }
 }
 
-export function store_projects() {
+// store all projects in local storage - used initially to save old data but not needed going forward
+export function store_all_projects() {
     if (storageAvailable("localStorage")) {
         localStorage.setItem("projects_list", JSON.stringify(all_projects));
-        console.log('project stored')
+        console.log('projects stored')
+    } else {
+        console.log("Local storage is not available");
+    }
+}
+
+//not implemented yet
+export function store_todo_item(item) {
+    if (storageAvailable("localStorage")) {
+        localStorage.setItem(item.title, JSON.stringify(item));
+        console.log('todo item stored')
+    } else {
+        console.log("Local storage is not available");
+    }
+}
+
+// not implemented yet
+export function retrieve_all_todo_items() {
+    if (storageAvailable("localStorage")) {
+        const item = JSON.parse(localStorage.getItem(title));
+        if (item) {
+            return item;
+        }
     } else {
         console.log("Local storage is not available");
     }
