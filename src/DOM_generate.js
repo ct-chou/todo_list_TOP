@@ -17,7 +17,7 @@ function dom_add_task() {
     document.getElementById('new-title').value = '';
     document.getElementById('new-description').value = '';
     document.getElementById('new-due-date').value = '';
-    document.getElementById('new-priority').value = 'normal';
+    document.getElementById('new-priority').value = 'Normal';
     document.getElementById('new-project').value = '';
   });
 
