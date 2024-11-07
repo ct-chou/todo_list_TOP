@@ -25,12 +25,13 @@
                         <div>
                             <div id="form-bucket-1">
                                 <div id="title-div">
-                                    <p>Title: </p>
-                                    <input type="text" id="new-title" placeholder="Title">
+                                    <p>*Title: </p>
+                                    <input type="text" id="new-title" placeholder="Title" name="title_input" required>
                                 </div>
                                 <div id="project-div">
-                                    <p>Project: </p>
-                                    <input type="text" id="new-project" placeholder="Project">
+                                    <p>*Project: </p>
+                                    <input type="text" id="new-project" placeholder="Project" name="project_input"
+                                        required>
                                 </div>
                             </div>
                             <div id="form-bucket-2">
@@ -42,7 +43,7 @@
                                     <p>Priority: </p>
                                     <select id="new-priority">
                                         <option value="low">Low</option>
-                                        <option value="normal">Normal</option>
+                                        <option value="normal" selected>Normal</option>
                                         <option value="high">High</option>
                                     </select>
                                 </div>

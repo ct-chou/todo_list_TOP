@@ -16,7 +16,7 @@ function dom_add_task() {
     document.getElementById('new-title').value = '';
     document.getElementById('new-description').value = '';
     document.getElementById('new-due-date').value = '';
-    document.getElementById('new-priority').value = '';
+    document.getElementById('new-priority').value = 'normal';
     document.getElementById('new-project').value = '';
   });
 
@@ -32,7 +32,11 @@ function dom_add_task() {
     const due_date = document.getElementById('new-due-date').value;
     const priority = document.getElementById('new-priority').value;
     const project = document.getElementById('new-project').value;
-    // const project = "Ollie;"
+
+    if (!title || !project) {
+      alert('Please fill out all required fields.');
+      return;
+    }
     create_new_item(title, description, due_date, priority, project);
     // console.log(title, description, due_date, priority, project);
     dialog.close();
