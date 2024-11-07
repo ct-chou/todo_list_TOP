@@ -68,6 +68,8 @@ function dom_project_remove(project_name) {
   if (!confirm(`Are you sure you want to delete the project ${project_name}?`)) {
     return;
   }
+  delete_project(project_name);
+  store_all_projects();
   const project_div = document.getElementById(project_name);
   if (project_div) {
     // console.log('calling .remove()');
@@ -116,7 +118,6 @@ export function dom_project_add(project, project_name) {
   delete_button.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    delete_project(project_name);
     dom_project_remove(project_name);
   });
 
@@ -247,8 +248,8 @@ function dom_display_project(project, project_name) {
       if (!confirm(`Are you sure you want to delete the item: ${item.title}?`)) {
         return;
       }
-
       delete_from_project(project, item);
+      store_all_projects();
       dom_display_project(project, project_name);
     });
     complete_button.addEventListener('click', (e) => {
