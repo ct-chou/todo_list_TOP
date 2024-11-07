@@ -24,11 +24,11 @@ if (process.env.NODE_ENV !== 'production') {
 // add_to_project(ollie.title, item4);
 // dom_select_project(ollie, ollie.title);
 // dom_select_project(default_proj, default_proj.title);
+// store_all_projects();
 // // END POPULATION OF DEFAULT LISTS
 
 dom_initialize();
 console.log('initialized');
-// store_projects();
 load_all_projects();
 console.log('loaded projects');
 // format(new Date(2014, 1, 11), "yyyy-MM-dd");
