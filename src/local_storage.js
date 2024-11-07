@@ -1,3 +1,5 @@
+import { all_projects } from "./projects.js";
+
 export function storageAvailable(type) {
     let storage;
     try {
@@ -14,5 +16,25 @@ export function storageAvailable(type) {
             storage &&
             storage.length !== 0
         );
+    }
+}
+
+export function store_projects() {
+    if (storageAvailable("localStorage")) {
+        localStorage.setItem("projects_list", JSON.stringify(all_projects));
+        console.log('project stored')
+    } else {
+        console.log("Local storage is not available");
+    }
+}
+
+export function retrieve_projects() {
+    if (storageAvailable("localStorage")) {
+        const projects = JSON.parse(localStorage.getItem("projects_list"));
+        if (projects) {
+            return projects;
+        }
+    } else {
+        console.log("Local storage is not available");
     }
 }

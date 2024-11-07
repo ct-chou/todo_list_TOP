@@ -1,4 +1,7 @@
 import { archive_item } from "./archive";
+import { dom_select_project } from "./DOM_generate";
+import { retrieve_projects } from "./local_storage";
+import { create_new_item } from "./todo";
 
 export const all_projects = [];
 
@@ -11,13 +14,38 @@ export function find_project(name) {
     return null;
 }
 
+// call local_storage.js functions to retrieve all projects
+export function retrieve_db_projects() {
+    const projects = retrieve_projects();
+    for (let i = 0; i < projects.length; i++) {
+        const project = new Project(projects[i].title);
+        projects[i].items.forEach(item => {
+            // console.log(item._title)
+            const todo_item = create_new_item(item._title, item._description, item._dueDate, item._priority, projects[i].title);
+            project.items.push(todo_item);
+        });
+        // all_projects.push(project);
+    }
+}
+
+export function load_all_projects() {
+    retrieve_db_projects();
+    list_all_projects();
+    // for (let i = 0; i < all_projects.length; i++) {
+    // dom_select_project(all_projects[i], all_projects[i].title);
+    // }
+}
+
 //helper debug function
 function list_all_projects() {
+    console.log("Listing all projects: ");
     all_projects.forEach(project => {
-        console.log(project.title);
-        // project.items.forEach(item => {
-        // console.log(item.title);
-        // });
+        console.log("Project: ");
+        console.log(` ${project.title}`);
+        console.log("-->Items: ");
+        project.items.forEach(item => {
+            console.log(`---->${item.title}`);
+        });
     });
 }
 
@@ -77,7 +105,7 @@ export class Project {
 
 export function new_project(name) {
     if (check_existing_project(name)) {
-        console.log("Project already exists - error");
+        console.log("Project already exists");
         return null;
     }
     const project = new Project(name);
